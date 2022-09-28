@@ -47,17 +47,6 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         log: true,
         waitConfirmations: waitBlockConfirmations,
     })
-
-    // Verify the deployment
-    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-        log("Verifying...")
-        await verify(raffle.address, arguments)
-    }
-
-    log("Enter lottery with command:")
-    const networkName = network.name == "hardhat" ? "localhost" : network.name
-    log(`yarn hardhat run scripts/enterRaffle.js --network ${networkName}`)
-    log("----------------------------------------------------")
 }
 
 module.exports.tags = ["all", "raffle"]

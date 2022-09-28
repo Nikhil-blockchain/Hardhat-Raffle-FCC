@@ -7,24 +7,24 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 import "hardhat/console.sol";
 
-/* Errors */
+// Errors
 error Raffle__UpkeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256 raffleState);
 error Raffle__TransferFailed();
 error Raffle__SendMoreToEnterRaffle();
 error Raffle__RaffleNotOpen();
 
-/**@title A sample Raffle Contract
- * @author Patrick Collins
- * @notice This contract is for creating a sample raffle contract
+/**@title A sample Raffle Lottery Contract
+ * @author Nikhil-Blockchain
+ * @notice This contract is for creating a sample raffle Lottery contract
  * @dev This implements the Chainlink VRF Version 2
  */
 contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
-    /* Type declarations */
+    // Type declarations
     enum RaffleState {
         OPEN,
         CALCULATING
     }
-    /* State variables */
+    // State variables
     // Chainlink VRF Variables
     VRFCoordinatorV2Interface private immutable i_vrfCoordinator;
     uint64 private immutable i_subscriptionId;
@@ -41,12 +41,12 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     address payable[] private s_players;
     RaffleState private s_raffleState;
 
-    /* Events */
+    // Events
     event RequestedRaffleWinner(uint256 indexed requestId);
     event RaffleEnter(address indexed player);
     event WinnerPicked(address indexed player);
 
-    /* Functions */
+    // Functions
     constructor(
         address vrfCoordinatorV2,
         uint64 subscriptionId,
@@ -132,7 +132,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
             i_callbackGasLimit,
             NUM_WORDS
         );
-        // Quiz... is this redundant?
+
         emit RequestedRaffleWinner(requestId);
     }
 
@@ -164,7 +164,7 @@ contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
         emit WinnerPicked(recentWinner);
     }
 
-    /** Getter Functions */
+    // Getter Functions
 
     function getRaffleState() public view returns (RaffleState) {
         return s_raffleState;
