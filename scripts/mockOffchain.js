@@ -24,6 +24,7 @@ async function mockVrf(requestId, raffle) {
     console.log("Responded!")
     const recentWinner = await raffle.getRecentWinner()
     console.log(`The winner is: ${recentWinner}`)
+    console.log(`The winner is: ${recentWinner}`)
 }
 
 mockKeepers()
